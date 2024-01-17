@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Répertoire du fichier .csv
+home="/home/e_679/Projet"
+
+# Vérification de l'argument 
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <csv_filename>"
+    exit 1
+fi
+
+# Chemin complet du fichier CSV
+csv_file="${home}/${1}"
+
+# Vérification si le fichier CSV existe
+if [ ! -f "$csv_file" ]; then
+    echo "Le fichier CSV '$1' n'existe pas dans le répertoire '$home'."
+    exit 1
+fi
+
+# Chemin complet du fichier de sortie
+output_file="${home}/temp/conducteur_distance.dat"
+
+start_time=$(date +%s.%N)
+
+awk -b -F';' '
+    NR > 1 {
+        key = $6;
+        distance = $5;  # La distance se trouve dans le cinquième champ
+
+        # Vérifier si la distance est un nombre
+        if (distance ~ /^[0-9]+(\.[0-9]+)?$/) {
+            total_distance[key] += distance;
+        }
+    }
+    END {
+        # Trier les conducteurs par distance parcourue
+        PROCINFO["sorted_in"] = "@val_num_desc";
+        for (driver in total_distance) {
+            print "Nom du conducteur:", driver, "- Distance totale parcourue:", total_distance[driver], "km";
+        }
+    }
+' "$csv_file" | head -n 10 > "$output_file"
+end_time=$(date +%s.%N)
+elapsed_time=$(echo "$end_time - $start_time" | bc)
+# Contenu du fichier
+echo "Contenu du fichier conducteur_distance.dat :"
+cat "$output_file"
+echo "Temps d'exécution : $elapsed_time secondes"
