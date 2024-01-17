@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Répertoire du fichier .csv
+home="/home/e_679/Projet"
+
+# Vérification de l'argument 
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <csv_filename>"
+    exit 1
+fi
+
+# Chemin complet du fichier CSV
+csv_file="${home}/${1}"
+
+# Vérification si le fichier CSV existe
+if [ ! -f "$csv_file" ]; then
+    echo "Le fichier CSV '$1' n'existe pas dans le répertoire '$home'."
+    exit 1
+fi
+
+# Chemin complet du fichier de sortie
+output_file="${home}/temp/conducteur_trajets.dat"
+
+start_time=$(date +%s.%N)
+
+# Utilisation de awk avec une syntaxe simplifiée
+awk -b -F';' '
+    NR > 1 {
+        # Créer une clé unique pour chaque combinaison de conducteur et de Route ID
+        if (!(($6 SUBSEP $1) in unique)) {
+            unique[$6 SUBSEP $1]
+            count[$6]++
+        }
+    }
+    END {
+        # Imprimer les résultats pour chaque conducteur
+        for (driver in count) {
+            print count[driver], driver
+        }
+    }
+' "$csv_file" | sort -nrk1,1 | head -n 10 > "$output_file"
+end_time=$(date +%s.%N)
+elapsed_time=$(echo "$end_time - $start_time" | bc)
+# Contenu du fichier
+echo "Contenu du fichier conducteur_trajets.dat :"
+cat "$output_file"
+echo "Temps d'exécution : $elapsed_time secondes"
