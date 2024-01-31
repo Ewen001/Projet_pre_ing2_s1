@@ -15,7 +15,7 @@ Script Shell:
  
 Programme C:
  
-	• Compilation via le Makefile
+	•       Compilation via le Makefile
 	•	Effectue des opérations de filtrage, tri, et/ou calcul en fonction des besoins du script Shell
 	•	Retourne un code d’erreur en cas de problème, libère les allocations mémoires, et limite la taille mémoire utilisée.
 
