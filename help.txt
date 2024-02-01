@@ -1,0 +1,16 @@
+PROGRAMME D'AIDE
+
+- L'option -d1 : Affiche les 10 conducteurs avec le plus de trajets.
+Le graphique associé est de type histogramme horizontal avec en ordonnée les noms complets des conducteurs, et en abscisse le nombre de trajets effectués.
+
+- L'option -d2 : Affiche les 10 conducteurs ayant parcouru les 10 plus grandes distances.
+Le graphique associé est de type histogramme horizontal avec en ordonnée les noms complets des conducteurs, et en abscisse la distance totale parcourue.
+
+- L'option -l : Affiche les 10 trajets les plus longs.
+Le graphique associé est de type histogramme vertical avec en abscisse l’identifiant du trajet, et en ordonnée la distance en km. 
+
+-L'option -t : Affiche les 10 villes les plus traversées par les conducteurs.
+Le graphique associée est de type histogramme regroupé, il présentera en abscisse les noms des villes, et en ordonnée le nombre de trajets par conducteurs. Pour chaque ville, il y aura 2 barres verticales, celle de gauche indiquera le nombre de trajets, et celle de droite le nombre de conducteurs.
+
+-L'option -s : Affiche les statistiques sur les étapes
+Le  graphique associée sera composé de 2 courbes indiquant pour chaque abscisse les valeurs min et max des distances, et une troisième entre les deux pour indiquer la moyenne. En abscisse il y aura les identifiants des trajets, et en ordonnée les distances en km.
