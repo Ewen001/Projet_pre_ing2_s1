@@ -23,11 +23,15 @@ Programme C:
 II Instructions d’Utilisation
 
 	1.	Compilation du Programme C:
-	•	Naviguez vers le dossier progc.
-	•	Exécutez make pour compiler le programme.
+        •       Il se compile tout seul
+ 
 	2.	Exécution du Script Shell:
 	•	Placez le fichier de données CSV “data.csv” dans le dossier ‘data’.
-	•	Exécutez le script Shell avec les arguments appropriés.
+        •       Se donner les droits d'exécution sur le fichier cy_truck.sh : 
+	          chmod+x cy.truck.sh 
+	•	Exécutez le script Shell avec les arguments appropriés : 
+                  ./cy_truck.sh data/data.csv "options" 
+	        On peut d'ailleurs en mettre plusieurs à la fois.
 
 	3.	Options du Script Shell:
 	•	-d1: Conducteurs avec le plus de trajets
